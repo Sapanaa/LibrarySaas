@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import { ReactNode } from 'react'
+import { Toaster } from "@/components/ui/sonner"
 
 const layout = ({children}: {children: ReactNode}) => {
   return <main className='root-container'>
@@ -8,6 +9,8 @@ const layout = ({children}: {children: ReactNode}) => {
     </div>
     <div className='mt-10 pb-20 '>
     {children}
+
+   <Toaster />
     </div>
   </main>
 }

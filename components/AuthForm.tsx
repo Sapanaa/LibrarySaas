@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import React from "react"
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-import ImageUpload from "./ImageUpload"
+
 
 
 interface Props<T extends FieldValues> {
@@ -65,9 +65,8 @@ const AuthForm = <T extends FieldValues>({
                 <FormItem>
                   <FormLabel className="capitalize">{FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}</FormLabel>
                   <FormControl>
-                     {field.name === 'universityCard' ? <ImageUpload /> : 
-                     (<Input required type={FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]} {...field} />)
-                    } 
+                     <Input required type={FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]} {...field} />
+                    
                    
                   </FormControl>
                   <FormMessage />
