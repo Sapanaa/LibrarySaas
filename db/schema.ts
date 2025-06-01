@@ -1,0 +1,26 @@
+import {
+  pgTable,
+  pgEnum,
+  varchar,
+  text,
+  uuid,
+  timestamp,
+  date,
+} from "drizzle-orm/pg-core";
+
+export const STATUS_ENUM = pgEnum("status", ["PENDING", "REJECTED", "APPROVED"]);
+export const ROLE_ENUM = pgEnum("role", ["ADMIN", "USER"]);
+export const BORROW_STATUS_ENUM = pgEnum("borrow_status", ["BORROWED", "RETURNED"]);
+
+export const users = pgTable("users", {
+  id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
+  fullName: varchar("full_name", { length: 256 }).notNull(),
+  universityId: varchar("university_id", { length: 256 }).notNull().unique(),
+  password: varchar("password").notNull(),
+  universityCard: text("university_card").notNull(),
+  status: STATUS_ENUM("status").notNull().default("PENDING"),
+  role: ROLE_ENUM("role").notNull().default("USER"),
+  email: varchar("email", { length: 256 }).notNull().unique(),
+  lastActivityDate: date("last_activity_date").defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});

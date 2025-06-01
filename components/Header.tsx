@@ -4,7 +4,9 @@ import Link from 'next/link'
 import React from 'react'
 import { usePathname } from 'next/navigation'
 import { FaBookOpen } from "react-icons/fa";
-const Header = () => {
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Session } from 'next-auth'
+const Header = ({session}: {session: Session}) => {
     const pathname = usePathname();
   return (
     <header className='my-10 flex justify-between gap-5'>
@@ -19,6 +21,13 @@ const Header = () => {
     <li>
         <Link href={'/about'} className={cn('text-base cursor-pointer capitalize ', pathname === '/about' && 'text-red-400')}>Search</Link>
     </li>
+      <li>
+    <Link href={'/my-profile'} >
+      <Avatar >
+        <AvatarFallback className='text-white bg-gray-500'>{session?.user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
+      </Avatar>
+    </Link>
+      </li>
       </ul>
     </header>
   )

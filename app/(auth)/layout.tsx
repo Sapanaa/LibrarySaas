@@ -1,6 +1,11 @@
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 import React, { ReactNode } from 'react'
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = async  ({ children }: { children: ReactNode }) => {
+  const session = await auth()
+
+  if(session) redirect('/')
   return (
     <main className="relative flex min-h-screen flex-col text-light-100 sm:flex-row">
       <section className="flex flex-1 items-center justify-center bg-pattern bg-cover bg-top px-5 py-10">
